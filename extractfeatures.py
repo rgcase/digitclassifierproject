@@ -66,14 +66,15 @@ def half_blackness_ratio(img, half):
     """
     if half == "top" or half == "bottom":
         mid = img.size[1] / 2
-        newimg = img.crop((0,0,img.size[0]-1,mid)) if half == "top" else \
-                 img.crop((0,mid,img.size[0]-1,img.size[1]-1))
+        newimg = img.crop((0,0,img.size[0],mid)) if half == "top" else \
+                 img.crop((0,mid,img.size[0],img.size[1]))
     elif half == "left" or half == "right":
         mid = img.size[0] / 2
-        newimg = img.crop((0,0,mid,img.size[1]-1)) if half == "left" else \
-                 img.crop((mid,0,img.size[0]-1,img.size[1]-1))
+        newimg = img.crop((0,0,mid,img.size[1])) if half == "left" else \
+                 img.crop((mid,0,img.size[0],img.size[1]))
     else:
         print "half_blackness_ratio called with invalid half parameter"
+
 
     return blackness_ratio(newimg)
 

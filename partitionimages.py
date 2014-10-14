@@ -38,11 +38,12 @@ def partition_training():
         for digit in digits:
             minx, miny, maxx, maxy = bounding_box(digit)
             digit_img = new_image(minx, miny, maxx, maxy)
-            for pixel in digit:
-                digit_img.putpixel((pixel[0] - minx, pixel[1] - miny), 0)
-            
-            digit_img.save("./trainingnums/" + str(dig) + "/" + str(k) + ".bmp")
-            k += 1
+            if digit_img.size[0] > 0 and digit_img.size[1] > 0:    
+                for pixel in digit:
+                    digit_img.putpixel((pixel[0] - minx, pixel[1] - miny), 0)
+                
+                digit_img.save("./trainingnums/" + str(dig) + "/" + str(k) + ".bmp")
+                k += 1
 
 def partition_test():
     for dig in xrange(10):
@@ -80,11 +81,12 @@ def partition_test():
         for digit in digits:
             minx, miny, maxx, maxy = bounding_box(digit)
             digit_img = new_image(minx, miny, maxx, maxy)
-            for pixel in digit:
-                digit_img.putpixel((pixel[0] - minx, pixel[1] - miny), 0)
-            
-            digit_img.save("./testnums/" + str(dig) + "/" + str(k) + ".bmp")
-            k += 1
+            if digit_img.size[0] > 0 and digit_img.size[1] > 0:    
+                for pixel in digit:
+                    digit_img.putpixel((pixel[0] - minx, pixel[1] - miny), 0)
+                
+                digit_img.save("./testnums/" + str(dig) + "/" + str(k) + ".bmp")
+                k += 1
 
 
 

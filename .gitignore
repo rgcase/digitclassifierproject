@@ -1,0 +1,4 @@
+*.pyc
+*.bmp
+testnums/
+trainingnums/

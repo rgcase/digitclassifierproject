@@ -9,7 +9,7 @@ def adjacent_pixels(pixel, visited):
             elif (pixel[0]+m,pixel[1]+n) not in visited:
                 yield (pixel[0]+m,pixel[1]+n)
 
-def find_region(i,j,isize,jsize,visited,pixels,digits):
+def find_region(i,j,isize,jsize,visited,pixels,digits,colour,minsize):
     to_check = Queue()
     to_check.put((i,j))
     shape = set()
@@ -22,11 +22,11 @@ def find_region(i,j,isize,jsize,visited,pixels,digits):
             if adj not in visited and \
                 0 <= adj[0] and adj[0] < isize and \
                 0 <= adj[1] and adj[1] < jsize and \
-                pixels[adj[0],adj[1]] == 0:
+                pixels[adj[0],adj[1]] == colour:
                     visited.add(adj)
                     to_check.put((adj[0],adj[1]))
     
-    if len(shape) > 2:
+    if len(shape) > minsize:
         digits.append(shape)
     return (visited, pixels, digits)
                    

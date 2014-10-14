@@ -1,6 +1,7 @@
 from PIL import Image
 from subprocess import Popen, PIPE
 from imageprocessing import find_region
+import csv
 
 def blackness_ratio(img):
     total = float(img.size[0] * img.size[1])
@@ -40,23 +41,19 @@ def number_of_holes(img):
             else:
                 continue
     holes_on_edges = 0
-
     for hole in holes:
         edge = False
         for i in xrange(img.size[0]):
             if (i, 0) in hole or (i, img.size[1]-1) in hole:
                 edge = True
                 break
+        else:
+            for j in xrange(img.size[1]):
+                if (0, j) in hole or (img.size[0]-1, j) in hole:
+                    edge = True
+                    break
         if edge == True:
-            break
-        for j in xrange(img.size[1]):
-            if (0, j) in hole or (img.size[0]-1, j) in hole:
-                edge = True
-                break
-        if edge == True:
-            edge = False
             holes_on_edges += 1
-
     return len(holes) - holes_on_edges
 
 def half_blackness_ratio(img, half):
@@ -77,4 +74,42 @@ def half_blackness_ratio(img, half):
 
 
     return blackness_ratio(newimg)
+
+
+def writedata(datawriter, i):
+    result = Popen(['ls', './trainingnums/' + str(i) + '/'], stdout=PIPE).communicate()
+    result = result[0].splitlines()
+
+    for file in result:
+        if file:
+            img = Image.open('./trainingnums/' + str(i) + '/' + file, 'r')
+        
+            datawriter.writerow([str(i), \
+                                 str(blackness_ratio(img)), \
+                                 str(aspect_ratio(img)), \
+                                 str(number_of_holes(img)), \
+                                 str(half_blackness_ratio(img, "top")), \
+                                 str(half_blackness_ratio(img, "bottom")), \
+                                 str(half_blackness_ratio(img, "left")), \
+                                 str(half_blackness_ratio(img, "right")), \
+                                 ])
+
+
+if __name__ == '__main__':
+    csvfile = open('trainingdata.txt', 'wb')
+    datawriter = csv.writer(csvfile, delimiter = ' ')
+
+    datawriter.writerow(['digit', \
+                         'blackness_ratio', \
+                         'aspect_ratio', \
+                         'number_of_holes', \
+                         'top_blackness_ratio', \
+                         'bottom_blackness_ratio', \
+                         'left_blackness_ratio', \
+                         'right_blackness_ratio', \
+                         ])
+
+    for i in xrange(10):
+        writedata(datawriter, i)
+
 

@@ -3,3 +3,5 @@
 *.bmp
 testnums/
 trainingnums/
+printdata.py
+trainingdatatoprint.txt

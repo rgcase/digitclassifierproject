@@ -75,6 +75,45 @@ def half_blackness_ratio(img, half):
 
     return blackness_ratio(newimg)
 
+def horizontal_line_ratio(img):
+    in_black = False
+    pixels = img.load()
+    max_line = 0
+    for j in xrange(img.size[1]):
+        count = 0
+        for i in xrange(img.size[0]):
+            if pixels[i,j] == 0:
+                count += 1
+                in_black = True
+            elif in_black:
+                max_line = count if max_line < count else max_line
+                count = 0
+                in_black = False
+        else:
+            max_line = count if max_line < count else max_line
+            count = 0
+    return max_line / float(img.size[0])
+
+def vertical_line_ratio(img):
+    in_black = False
+    pixels = img.load()
+    max_line = 0
+    for i in xrange(img.size[0]):
+        count = 0
+        for j in xrange(img.size[1]):
+            if pixels[i,j] == 0:
+                count += 1
+                in_black = True
+            elif in_black:
+                max_line = count if max_line < count else max_line
+                count = 0
+                in_black = False
+        else:
+            max_line = count if max_line < count else max_line
+            count = 0
+    return max_line / float(img.size[1])
+
+
 
 def writedata(datawriter, i):
     result = Popen(['ls', './trainingnums/' + str(i) + '/'], stdout=PIPE).communicate()
@@ -83,7 +122,7 @@ def writedata(datawriter, i):
     for file in result:
         if file:
             img = Image.open('./trainingnums/' + str(i) + '/' + file, 'r')
-        
+
             datawriter.writerow([str(i), \
                                  str(blackness_ratio(img)), \
                                  str(aspect_ratio(img)), \
@@ -92,6 +131,8 @@ def writedata(datawriter, i):
                                  str(half_blackness_ratio(img, "bottom")), \
                                  str(half_blackness_ratio(img, "left")), \
                                  str(half_blackness_ratio(img, "right")), \
+                                 str(longest_horizontal_line(img)), \
+                                 str(longest_vertical_line(img)), \
                                  ])
 
 
@@ -107,9 +148,9 @@ if __name__ == '__main__':
                          'bottom_blackness_ratio', \
                          'left_blackness_ratio', \
                          'right_blackness_ratio', \
+                         'longest_horizontal_line', \
+                         'longest_vertical_line', \
                          ])
 
     for i in xrange(10):
         writedata(datawriter, i)
-
-

@@ -148,8 +148,8 @@ if __name__ == '__main__':
                          'bottom_blackness_ratio', \
                          'left_blackness_ratio', \
                          'right_blackness_ratio', \
-                         'longest_horizontal_line', \
-                         'longest_vertical_line', \
+                         'horizontal_line_ratio', \
+                         'vertical_line_ratio', \
                          ])
 
     for i in xrange(10):

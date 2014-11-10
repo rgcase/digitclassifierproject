@@ -131,8 +131,8 @@ def writedata(datawriter, i):
                                  str(half_blackness_ratio(img, "bottom")), \
                                  str(half_blackness_ratio(img, "left")), \
                                  str(half_blackness_ratio(img, "right")), \
-                                 str(longest_horizontal_line(img)), \
-                                 str(longest_vertical_line(img)), \
+                                 str(horizontal_line_ratio(img)), \
+                                 str(vertical_line_ratio(img)), \
                                  ])
 
 

@@ -2,6 +2,7 @@ from PIL import Image
 from subprocess import Popen, PIPE
 from imageprocessing import find_region
 import csv
+from sys import argv
 
 def blackness_ratio(img):
     total = float(img.size[0] * img.size[1])
@@ -115,15 +116,17 @@ def vertical_line_ratio(img):
 
 
 
-def writedata(datawriter, i):
-    result = Popen(['ls', './trainingnums/' + str(i) + '/'], stdout=PIPE).communicate()
+def writedata(datawriter, i, opt):
+
+    result = Popen(['ls', './' + opt + 'nums/' + str(i) + '/'], stdout=PIPE).communicate()
     result = result[0].splitlines()
 
     for file in result:
         if file:
-            img = Image.open('./trainingnums/' + str(i) + '/' + file, 'r')
-
-            datawriter.writerow([str(i), \
+            img = Image.open('./' + opt + 'nums/' + str(i) + '/' + file, 'r')
+            if img.size[0] != 0 and img.size[1] != 0 and \
+               img.size[0] != 1 and img.size[1] != 1:
+                datawriter.writerow([str(i), \
                                  str(blackness_ratio(img)), \
                                  str(aspect_ratio(img)), \
                                  str(number_of_holes(img)), \
@@ -134,10 +137,30 @@ def writedata(datawriter, i):
                                  str(horizontal_line_ratio(img)), \
                                  str(vertical_line_ratio(img)), \
                                  ])
+                img.close()
 
 
-if __name__ == '__main__':
+def write_training_data():
     csvfile = open('trainingdata.txt', 'wb')
+    datawriter = csv.writer(csvfile, delimiter = ' ')
+
+    datawriter.writerow(['digit', \
+                     'blackness_ratio', \
+                     'aspect_ratio', \
+                     'number_of_holes', \
+                     'top_blackness_ratio', \
+                     'bottom_blackness_ratio', \
+                     'left_blackness_ratio', \
+                     'right_blackness_ratio', \
+                     'horizontal_line_ratio', \
+                     'vertical_line_ratio', \
+                     ])
+
+    for i in xrange(10):
+        writedata(datawriter, i, 'training')
+
+def write_test_data():
+    csvfile = open('./testdata.txt', 'wb')
     datawriter = csv.writer(csvfile, delimiter = ' ')
 
     datawriter.writerow(['digit', \
@@ -153,4 +176,15 @@ if __name__ == '__main__':
                          ])
 
     for i in xrange(10):
-        writedata(datawriter, i)
+        writedata(datawriter, i, 'test')
+
+
+
+if __name__ == '__main__':
+    if len(argv) > 1 and argv[1] == '-train':
+        write_training_data()
+    elif len(argv) > 1 and argv[1] == '-test':
+        write_test_data()
+    else:
+        write_training_data()
+        write_test_data()

@@ -4,8 +4,31 @@ from imageprocessing import find_region, new_image, bounding_box
 import readdata
 import algorithms
 
+def linear_regression():
+    _, trainingset = readdata.read_training_data()
+    _, testcases = readdata.read_test_data()
 
-def classify():
+    algorithms.linear(testcases, trainingset)
+
+def support_vector_machine():
+    _, trainingset = readdata.read_training_data()
+    _, testcases = readdata.read_test_data()
+
+    algorithms.support_vector_machine(testcases, trainingset)
+
+def naive_bayes():
+    _, trainingset = readdata.read_training_data()
+    _, testcases = readdata.read_test_data()
+
+    algorithms.naive_bayes(testcases, trainingset)
+
+def rnd_for():
+    _, trainingset = readdata.read_training_data()
+    _, testcases = readdata.read_test_data()
+
+    algorithms.random_forest(testcases, trainingset)
+
+def k_nearest_neighbour():
 
     _, trainingset = readdata.read_training_data()
     _, testcases = readdata.read_test_data()
@@ -15,7 +38,7 @@ def classify():
     errors = open('./errors.txt', 'w')
 
     for test in testcases:
-        classification = algorithms.nearest_neighbour(test, trainingset)
+        classification = algorithms.k_nearest_neighbour(1, test, trainingset)
         if classification == test[0]:
             correct += 1
         else:
@@ -24,4 +47,7 @@ def classify():
     print correct / float(len(testcases))
 
 if __name__ == '__main__':
-    classify()
+    #k_nearest_neighbour()
+    rnd_for()
+    #naive_bayes()
+    #support_vector_machine()

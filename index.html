@@ -35,11 +35,11 @@
             </p>
             <p>
             Image files are accepted in .bmp format for both training and classification,
-            and are dealt with using the Pillow library.
+            and are dealt with using the Pillow[1] library.
             </p>
             <p>
             Classification methods include a naive implementation of k-nearest neighbours,
-            and multiple other methods that are available in the scikit-learn library.
+            and multiple other methods that are available in the scikit-learn[2] library.
             </p>
             <p>
             The accuracy of the classifier is not really acceptable for any real use but 
@@ -55,13 +55,44 @@
     </div>
 </div>
 
+<hr>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
-        <h1>
+            <h1>Feature Extraction</h1>
+            <p>
+            The examples I used for both the training and test data were obtained from
+            the CISC 859 course website. These images can be found 
+            <a href="http://research.cs.queensu.ca/home/cisc859/download/859.digits/bmp.images.patrice/">
+            here</a>. The images used for training were the files prefixed by "trg" and 
+            the test images were the files prefixed by "test".
+            </p>
+            <p>
+            The first phase of extracting features is to extract the digits themselves
+            from the .bmp images. This happens in <a href="https://github.com/rgcase/digitclassifierproject/blob/master/partitionimages.py">
+            partitionimages.py</a>. Each image file is opened and loaded as an Image 
+            object using Pillow.
+            </p>
 
 
 
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>References</h1>
+            <p>
+            [1]Pillow: <a href="https://pillow.readthedocs.org/">https://pillow.readthedocs.org/</a></br>
+            [2]scikit-learn: <a href="http://scikit-learn.org/">http://scikit-learn.org/</a>
+            </p>
         </div>
     </div>
 </div>

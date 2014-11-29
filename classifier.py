@@ -3,6 +3,7 @@ from subprocess import Popen, PIPE, call
 from imageprocessing import find_region, new_image, bounding_box
 import readdata
 import algorithms
+import sys
 
 def linear_regression():
     _, trainingset = readdata.read_training_data()
@@ -28,7 +29,7 @@ def rnd_for():
 
     algorithms.random_forest(testcases, trainingset)
 
-def k_nearest_neighbour():
+def k_nearest_neighbour(k):
 
     _, trainingset = readdata.read_training_data()
     _, testcases = readdata.read_test_data()
@@ -38,7 +39,7 @@ def k_nearest_neighbour():
     errors = open('./errors.txt', 'w')
 
     for test in testcases:
-        classification = algorithms.k_nearest_neighbour(1, test, trainingset)
+        classification = algorithms.k_nearest_neighbour(k, test, trainingset)
         if classification == test[0]:
             correct += 1
         else:
@@ -47,7 +48,31 @@ def k_nearest_neighbour():
     print correct / float(len(testcases))
 
 if __name__ == '__main__':
-    #k_nearest_neighbour()
-    rnd_for()
-    #naive_bayes()
-    #support_vector_machine()
+    if len(sys.argv) == 1:
+            if len(sys.argv) == 1 and sys.argv[1] = "-rndfor":
+        rnd_for()
+    elif len(sys.argv) == 1 and sys.argv[1] = "-bayes":
+        naive_bayes()
+    elif len(sys.argv) == 1 and sys.argv[1] = "-svm":
+        support_vector_machine()
+    elif len(sys.argv) >= 1 and sys.argv[1] = "-knn":
+        try:
+            k = sys.argv[2]
+            k = int(k)
+        except IndexError:
+            k = 1
+        k_nearest_neighbour(k)
+    else:
+        print \
+        """
+        Choose a classifier by adding the corresponding flag:
+            Random Forest:          -rndfor
+            Naive Bayes:            -bayes
+            Support Vector Machine: -svm
+            k-Nearest-Neighbour:    -knn
+
+        Use the command:
+            python classifier.py {classifier flag} {k (for k-Nearest-Neighbour only)}
+        """
+
+

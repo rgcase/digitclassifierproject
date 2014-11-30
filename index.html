@@ -71,16 +71,90 @@
             <p>
             The first phase of extracting features is to extract the digits themselves
             from the .bmp images. This happens in <a href="https://github.com/rgcase/digitclassifierproject/blob/master/partitionimages.py">
-            partitionimages.py</a>. Each image file is opened and loaded as an Image 
-            object using Pillow.
+            partitionimages.py</a>. Each image file is opened and loaded as a greyscale 
+            Image object using Pillow.
             </p>
+            <p>
+            Each file is thresholded so that pixels with value less than 200 are set to
+            0 and pixels with value greater than 200 are set to 255. After several 
+            tests, this threshold value seemed to produce the best results when 
+            extracting the individual digits. This extraction is done using a region
+            growing algorithm that can be found in 
+            <a href="https://github.com/rgcase/digitclassifierproject/blob/master/imageprocessing.py">
+            imageprocessing.py</a>. Once a black region is found, the bounding box
+            is computed, then a new Image object is created containing everything
+            in that bounding box. The image is saved in a folder containing all the 
+            images of the same digit, separated into training and test set.
+            </p>
+            <p>
+            Once the digits have all been extracted, the feature extraction can begin. 
+            All of this is accomplished in the 
+            <a href="https://github.com/rgcase/digitclassifierproject/blob/master/extractfeatures.py">
+            extractfeatures.py</a> file. The features that I used are:
+            </p>
+            <ul>
+                <li>Blackness Ratio</li>
+                <li>Number of Holes</li>
+                <li>Half-Blackness Ratio (Top, Bottom, Left, Right)</li>
+                <li>Ratio of Longest Horizontal Line to Horizontal Width</li>
+                <li>Ratio of Longest Vertical Line to Vertical Width</li>
+            </ul>
+            <p>
+            All this information is written to a .csv file so it can be used later
+            by the classification algorithms.
+            </p>
+            <p>
+            This feature set is probably not good enough to get good results on 
+            a larger set of characters like the English alphabet. I didn't do 
+            any rescaling of the digits which might help get better results. 
+            I also think that tweaking the feature space so that each feature 
+            contributes a roughly equal amount to a distance calculation 
+            could help improve accuracy. 
+            </p>
+        </div>
+    </div>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>Classifier Design</h1>
+            <p>
+            The first, and most successful, algorithm I tried was my own 
+            implementation of k-Nearest-Neighbours.
+            My implementation is naive in that it doesn't use any complicated
+            data structures. It simply finds the distance between the given 
+            record and all the training records using the Euclidean distance,
+            then sorts the distances and chooses the k smallest points. 
+            These points vote to classify the record, with a tie going to the 
+            class with the smallest numerical value. 
+            </p>
+            <p>
+            This implementation could be improved considerably, both in run time
+            and accuracy. To improve runtime, a data structure like a 
+            kd-tree could be created as a preprocessing step, then each 
+            query could be done in O(n*log m) time instead of the O(nm*log m) time
+            that it currently takes, where n and m are the number of test records 
+            and the number of training samples, respectively.
+            </p>
+            <p>
+            The k-Nearest-Neighbour classifier doesn't have very many knobs 
+            to turn when trying to improve the accuracy. Using a different 
+            distance function could possibly improve the results but the 
+            best way for the classifer to be more accurate would be to 
+            improve the set of features that are measured. I think that 
+            increasing the size of the feature space, hopefully with 
+            features that have some discrimination power, would help 
+            spread out the classes. It seems like right now my feature 
+            space is too small for the number of classes in the problem.
+            </p>
+            <p>
+            For comparison
 
 
         </div>
     </div>
 </div>
-
 
 
 

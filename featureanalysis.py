@@ -41,8 +41,8 @@ for i in xrange(10):
         count += 1
 
     count = float(count)
- 
-    htmlfile.write('<td>' + digit + '</td>')
+    htmlfile.write('<tr>\n')
+    htmlfile.write('<td>' + digit + '</td>\n')
 
     writefile.write('Digit ' + digit + ' feature values:\n')
     writefile.write('Blackness Ratio\n')
@@ -50,7 +50,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -61,7 +61,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -72,7 +72,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -84,7 +84,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -95,7 +95,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -106,7 +106,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -117,7 +117,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -128,7 +128,7 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
@@ -139,11 +139,13 @@ for i in xrange(10):
     htmlfile.write('<td>')
     for val in vals:
         rate = str( int( 100 * (val[1] / count)))
-        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        htmlfile.write(str(val[0]) + ' ' + rate + '%<br>')
         writefile.write('\t' + str(val[0]) + '\t' + \
                 rate + '%\n')
     htmlfile.write('</td>\n')
     writefile.write('\n')
+
+    htmlfile.write('</tr>\n')
 
 
 

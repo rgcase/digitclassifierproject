@@ -1,6 +1,6 @@
 
 writefile = open('./featureanalysis.txt', 'w')
-
+htmlfile = open('./htmlfile.txt', 'w')
 readfile = open('./trainingdata.txt', 'r')
 data = readfile.readlines()
 
@@ -41,60 +41,108 @@ for i in xrange(10):
         count += 1
 
     count = float(count)
+ 
+    htmlfile.write('<td>' + digit + '</td>')
 
     writefile.write('Digit ' + digit + ' feature values:\n')
     writefile.write('Blackness Ratio\n')
-    for key in black_ratio:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (black_ratio[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in black_ratio.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Aspect Ratio\n')
-    for key in aspect_ratio:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (aspect_ratio[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in aspect_ratio.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Number of Holes\n')
-    for key in holes:
-        writefile.write('\t' + key + '\t' + \
-                str( int( 100 * (holes[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in holes.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
+
     writefile.write('Top Blackness Ratio\n')
-    for key in top_black:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (top_black[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in top_black.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Bottom Blackness Ratio\n')
-    for key in bottom_black:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (bottom_black[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in bottom_black.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Left Blackness Ratio\n')
-    for key in left_black:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (left_black[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in left_black.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Right Blackness Ratio\n')
-    for key in right_black:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (right_black[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in right_black.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Horizontal Line Ratio\n')
-    for key in horiz_line:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (horiz_line[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in horiz_line.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
     writefile.write('Vertical Line Ratio\n')
-    for key in vert_line:
-        writefile.write('\t' + str(key) + '\t' + \
-                str( int( 100 * (vert_line[key] / count))) + '\n')
+    vals = sorted([(key, val) for key, val in vert_line.items()])
+    htmlfile.write('<td>')
+    for val in vals:
+        rate = str( int( 100 * (val[1] / count)))
+        htmlfile.write(str(val[0]) + ' ' + rate + '<br>')
+        writefile.write('\t' + str(val[0]) + '\t' + \
+                rate + '%\n')
+    htmlfile.write('</td>\n')
     writefile.write('\n')
 
 

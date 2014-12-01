@@ -56,13 +56,13 @@ def k_nearest_neighbour(k):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1 and sys.argv[1] == "-rndfor":
+    if len(sys.argv) == 2 and sys.argv[1] == "-rndfor":
         rnd_for()
-    elif len(sys.argv) == 1 and sys.argv[1] == "-bayes":
+    elif len(sys.argv) == 2 and sys.argv[1] == "-bayes":
         naive_bayes()
-    elif len(sys.argv) == 1 and sys.argv[1] == "-svm":
+    elif len(sys.argv) == 2 and sys.argv[1] == "-svm":
         support_vector_machine()
-    elif len(sys.argv) >= 1 and sys.argv[1] == "-knn":
+    elif len(sys.argv) >= 2 and sys.argv[1] == "-knn":
         try:
             k = sys.argv[2]
             k = int(k)

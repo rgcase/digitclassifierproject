@@ -46,12 +46,19 @@ def random_forest(tests, data):
     predictions = rfc.predict(unlabel_tests)
 
     correct = 0
+    total_per_digit = [0] * 10
+    correct_per_digit = [0] * 10
 
     for i in xrange(len(tests)):
+        total_per_digit[int(tests[i][0])] += 1
         if predictions[i] == tests[i][0]:
+            correct_per_digit[int(tests[i][0])] += 1
             correct += 1
 
-    print correct / float(len(tests))
+    print 'The overall recognition rate is: ' + str(correct / float(len(tests)))
+    print 'Broken down by digit:'
+    for i, num in enumerate(correct_per_digit):
+        print 'For digit ' + str(i) + ': ' + str(num / float(total_per_digit[i]))
 
 def naive_bayes(tests, data):
     training_labels = np.asarray([d[0] for d in data])
@@ -66,12 +73,19 @@ def naive_bayes(tests, data):
     predictions = gnb.predict(unlabel_tests)
 
     correct = 0
+    total_per_digit = [0] * 10
+    correct_per_digit = [0] * 10
 
     for i in xrange(len(tests)):
+        total_per_digit[int(tests[i][0])] += 1
         if predictions[i] == tests[i][0]:
+            correct_per_digit[int(tests[i][0])] += 1
             correct += 1
 
-    print correct / float(len(tests))
+    print 'The overall recognition rate is: ' + str(correct / float(len(tests)))
+    print 'Broken down by digit:'
+    for i, num in enumerate(correct_per_digit):
+        print 'For digit ' + str(i) + ': ' + str(num / float(total_per_digit[i]))
 
 def support_vector_machine(tests, data):
     training_labels = np.asarray([d[0] for d in data])
@@ -85,9 +99,16 @@ def support_vector_machine(tests, data):
     predictions = clf.predict(unlabel_tests)
 
     correct = 0
+    total_per_digit = [0] * 10
+    correct_per_digit = [0] * 10
 
     for i in xrange(len(tests)):
+        total_per_digit[int(tests[i][0])] += 1
         if predictions[i] == tests[i][0]:
+            correct_per_digit[int(tests[i][0])] += 1
             correct += 1
 
-    print correct / float(len(tests))
+    print 'The overall recognition rate is: ' + str(correct / float(len(tests)))
+    print 'Broken down by digit:'
+    for i, num in enumerate(correct_per_digit):
+        print 'For digit ' + str(i) + ': ' + str(num / float(total_per_digit[i]))

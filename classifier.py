@@ -35,27 +35,34 @@ def k_nearest_neighbour(k):
     _, testcases = readdata.read_test_data()
 
     correct = 0
+    total_per_digit = [0] * 10
+    correct_per_digit = [0] * 10
 
     errors = open('./errors.txt', 'w')
-
+    
     for test in testcases:
+        total_per_digit[int(test[0])] += 1
         classification = algorithms.k_nearest_neighbour(k, test, trainingset)
         if classification == test[0]:
+            correct_per_digit[int(test[0])] += 1
             correct += 1
         else:
             errors.write('Misclassified ' + test[0] + ' as ' + classification + '\n')
 
-    print correct / float(len(testcases))
+    print 'The overall recognition rate is: ' + str(correct / float(len(testcases)))
+    print 'Broken down by digit:'
+    for i, num in enumerate(correct_per_digit):
+        print 'For digit ' + str(i) + ': ' + str(num / float(total_per_digit[i]))
+
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-            if len(sys.argv) == 1 and sys.argv[1] = "-rndfor":
+    if len(sys.argv) == 1 and sys.argv[1] == "-rndfor":
         rnd_for()
-    elif len(sys.argv) == 1 and sys.argv[1] = "-bayes":
+    elif len(sys.argv) == 1 and sys.argv[1] == "-bayes":
         naive_bayes()
-    elif len(sys.argv) == 1 and sys.argv[1] = "-svm":
+    elif len(sys.argv) == 1 and sys.argv[1] == "-svm":
         support_vector_machine()
-    elif len(sys.argv) >= 1 and sys.argv[1] = "-knn":
+    elif len(sys.argv) >= 1 and sys.argv[1] == "-knn":
         try:
             k = sys.argv[2]
             k = int(k)

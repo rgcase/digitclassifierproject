@@ -304,7 +304,7 @@
             <h1>Classifier Design</h1>
             <p>
             The first, and most successful, algorithm I tried was my own 
-            implementation of k-Nearest-Neighbours.
+            implementation of k-nearest-neighbours.
             My implementation is naive in that it doesn't use any complicated
             data structures. It simply finds the distance between the given 
             record and all the training records using the Euclidean distance,
@@ -321,7 +321,7 @@
             and the number of training samples, respectively.
             </p>
             <p>
-            The k-Nearest-Neighbour classifier doesn't have very many knobs 
+            The k-nearest-neighbour classifier doesn't have very many knobs 
             to turn when trying to improve the accuracy. Using a different 
             distance function could possibly improve the results but the 
             best way for the classifer to be more accurate would be to 
@@ -338,7 +338,7 @@
             you can run a random forest, naive Bayes, or support 
             vector machine on the data. I spent a little bit of time 
             tweaking each of these, but none of them were able to 
-            improve on the k-Nearest-Neighbour classifier.
+            improve on the k-nearest-neighbour classifier.
             </p>
         </div>
     </div>
@@ -348,7 +348,7 @@
     <div class="row">
         <div class="col-lg-8">
             <h1>Results</h1>
-            After running the k-Nearest-Neighbour algorithm with several choices for k, 
+            After running the k-nearest-neighbour algorithm with several choices for k, 
             it turned out that for this test set a k value of 1 did the best. The 
             following table gives the results broken down by digit.
         </div>
@@ -406,7 +406,23 @@
             still expected it to be one of the easier digits to classify 
             without having to go to such lengths.
             </p>
-
+            <p>
+            The other classifiers did worse than the nearest-neighbour 
+            algorithm that I implemented myself. The random forest 
+            classifier did best with a forest of 100 trees and ended up 
+            with a recognition rate of about 0.621.
+            </p>
+            <p>
+            The naive Bayes classifier assumed a Gaussian distribution 
+            of the data, and came up with a 0.531 recognition rate.
+            </p>
+            <p>
+            Finally, I tried using a support vector machine classifier 
+            on my data set with a linear kernel function and got a 
+            0.611 recognition rate. This was closest to the 
+            nearest-neighbour classifier but after examining the 
+            per digit recognition rates, they were down nearly across the 
+            board
 
         </div>
     </div>

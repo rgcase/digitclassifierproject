@@ -266,12 +266,33 @@
     <div class="row">
         <div class="col-lg-8">
             <p>
+            The table above has a lot of information but it seems pretty clear 
+            that none of the features, besides the number of holes, are very 
+            good at characterizing the digits. Even within a digit, the values 
+            for many of the features are spread across a wide range.
+            </p>
+            <p>
+            I think that improving the feature set is the first place that 
+            I should be spending more time to improve the performance of any 
+            classifier on this data set. I would try normalizing the sizes of 
+            the images of the training samples, but most of the features are 
+            ratios anyway so I'm not sure how much that will help. Also, it's 
+            clear that the number of holes features discriminates between 
+            digits better than any other feature, so scaling the feature to 
+            larger values will make sure that only samples with the same number of
+            holes can possibly be near each other, at least while using the 
+            Euclidean distance. This would introduce some guaranteed error 
+            because, as you can see from the table above, the measurement of 
+            the number of holes isn't perfect, but it could increase the 
+            accuracy in some cases.
+            </p>
+            <p>
             This feature set is probably not good enough to get good results on 
-            a larger set of characters like the English alphabet. I didn't do 
-            any rescaling of the digits which might help get better results. 
-            I also think that tweaking the feature space so that each feature 
-            contributes a roughly equal amount to a distance calculation 
-            could help improve accuracy. 
+            a larger set of characters like the English alphabet. I'm not 
+            confident that it's good enough for even the problem of 
+            classifying the digits 0 to 9. Considerable changes will need to 
+            be made first before attempting to scale up any classifier 
+            built using these features.
             </p>
         </div>
     </div>
@@ -311,13 +332,27 @@
             space is too small for the number of classes in the problem.
             </p>
             <p>
-            For comparison
+            For comparison, I also tested my dataset with a few of the 
+            classifiers built into scikit-learn. Using different 
+            flags when running the script from the command line, 
+            you can run a random forest, naive Bayes, or support 
+            vector machine on the data. I spent a little bit of time 
+            tweaking each of these, but none of them were able to 
+            improve on the k-Nearest-Neighbour classifier.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>Results</h1>
 
 
         </div>
     </div>
 </div>
-
 
 
 

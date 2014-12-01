@@ -348,11 +348,70 @@
     <div class="row">
         <div class="col-lg-8">
             <h1>Results</h1>
+            After running the k-Nearest-Neighbour algorithm with several choices for k, 
+            it turned out that for this test set a k value of 1 did the best. The 
+            following table gives the results broken down by digit.
+        </div>
+    </div>
+     <div class="bs-docs-section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bs-component">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Digit</th>
+                                <th>Recognition Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr> <td>0</td> <td>0.567</th> </tr>
+                        <tr> <td>1</td> <td>0.631</th> </tr>
+                        <tr> <td>2</td> <td>0.698</th> </tr>
+                        <tr> <td>3</td> <td>0.783</th> </tr>
+                        <tr> <td>4</td> <td>0.498</th> </tr>
+                        <tr> <td>5</td> <td>0.660</th> </tr>
+                        <tr> <td>6</td> <td>0.650</th> </tr>
+                        <tr> <td>7</td> <td>0.911</th> </tr>
+                        <tr> <td>8</td> <td>0.542</th> </tr>
+                        <tr> <td>9</td> <td>0.512</th> </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <p>
+            The overall correct classification rate was around 0.643. The overall 
+            rate is lower than I had hoped but I think it could 
+            be improved significantly by putting some more work into the 
+            feature set. 
+            </p>
+            <p>
+            There are some surprises here in the per digit rates that 
+            I'm not really sure how to explain. It seems that the 
+            digits with no holes are easier to classify than the digits 
+            with one or more holes, because you can see that the highest 
+            correct classification rate was for the digits 7, 3 and 2, with 
+            5 and 1 also doing relatively well. 
+            </p>
+            <p>
+            More surprising to me is that the only digit with two holes, 
+            namely 8, was one of the most difficult to classify. I expect 
+            that scaling the number of holes feature to make it more 
+            significant than the other features would change that, but I 
+            still expected it to be one of the easier digits to classify 
+            without having to go to such lengths.
+            </p>
 
 
         </div>
     </div>
 </div>
+
 
 
 
